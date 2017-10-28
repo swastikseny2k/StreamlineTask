@@ -1,0 +1,40 @@
+2017-10-20 21:37:43.917  INFO 7320 --- [main] com.sen.streamlinetask.AppStarter        : Starting AppStarter on DESKTOP-Q97JHPU with PID 7320 (D:\WhatDeveloperDoes\StreamlineTask\StreamlineTask\target\classes started by swast in D:\WhatDeveloperDoes\StreamlineTask\StreamlineTask)
+2017-10-20 21:37:43.920  INFO 7320 --- [main] com.sen.streamlinetask.AppStarter        : No active profile set, falling back to default profiles: default
+2017-10-20 21:37:43.962  INFO 7320 --- [main] ationConfigEmbeddedWebApplicationContext : Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@3030cb59: startup date [Fri Oct 20 21:37:43 EDT 2017]; root of context hierarchy
+2017-10-20 21:37:45.322  INFO 7320 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [class org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$c3fe6df3] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-10-20 21:37:45.878  INFO 7320 --- [main] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat initialized with port(s): 8080 (http)
+2017-10-20 21:37:45.888  INFO 7320 --- [main] o.apache.catalina.core.StandardService   : Starting service Tomcat
+2017-10-20 21:37:45.889  INFO 7320 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/8.5.6
+2017-10-20 21:37:45.981  INFO 7320 --- [localhost-startStop-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2017-10-20 21:37:45.981  INFO 7320 --- [localhost-startStop-1] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 2022 ms
+2017-10-20 21:37:46.116  INFO 7320 --- [localhost-startStop-1] c.s.streamlinetask.aspect.LoggingAspect  : Entering method dispatcherRegistration of class class org.springframework.aop.aspectj.MethodInvocationProceedingJoinPoint$MethodSignatureImpl
+2017-10-20 21:37:46.130  INFO 7320 --- [localhost-startStop-1] c.s.streamlinetask.aspect.LoggingAspect  : Exiting method dispatcherRegistration of class class org.springframework.aop.aspectj.MethodInvocationProceedingJoinPoint$MethodSignatureImpl
+2017-10-20 21:37:46.266  INFO 7320 --- [localhost-startStop-1] o.s.b.w.servlet.ServletRegistrationBean  : Mapping servlet: 'dispatcherServlet' to [/*]
+2017-10-20 21:37:46.267  INFO 7320 --- [localhost-startStop-1] o.s.b.w.servlet.ServletRegistrationBean  : Mapping servlet: 'dispatcherServlet' to [/]
+2017-10-20 21:37:46.268  INFO 7320 --- [localhost-startStop-1] o.s.b.w.servlet.ServletRegistrationBean  : Servlet dispatcherServlet was not registered (possibly already registered?)
+2017-10-20 21:37:46.270  INFO 7320 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'characterEncodingFilter' to: [/*]
+2017-10-20 21:37:46.270  INFO 7320 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2017-10-20 21:37:46.270  INFO 7320 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2017-10-20 21:37:46.270  INFO 7320 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'requestContextFilter' to: [/*]
+2017-10-20 21:37:46.555  INFO 7320 --- [main] j.LocalContainerEntityManagerFactoryBean : Building JPA container EntityManagerFactory for persistence unit 'default'
+2017-10-20 21:37:46.571  INFO 7320 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2017-10-20 21:37:46.632  INFO 7320 --- [main] org.hibernate.Version                    : HHH000412: Hibernate Core {5.0.11.Final}
+2017-10-20 21:37:46.633  INFO 7320 --- [main] org.hibernate.cfg.Environment            : HHH000206: hibernate.properties not found
+2017-10-20 21:37:46.634  INFO 7320 --- [main] org.hibernate.cfg.Environment            : HHH000021: Bytecode provider name : javassist
+2017-10-20 21:37:46.672  INFO 7320 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2017-10-20 21:37:46.967  INFO 7320 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+2017-10-20 21:37:47.351  INFO 7320 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2017-10-20 21:37:48.132  INFO 7320 --- [main] s.w.s.m.m.a.RequestMappingHandlerAdapter : Looking for @ControllerAdvice: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@3030cb59: startup date [Fri Oct 20 21:37:43 EDT 2017]; root of context hierarchy
+2017-10-20 21:37:48.211  INFO 7320 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/logout],methods=[POST]}" onto public com.sen.streamlinetask.beans.GenericResponse com.sen.streamlinetask.controller.LoginController.logout(javax.servlet.http.HttpServletRequest)
+2017-10-20 21:37:48.212  INFO 7320 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/loginuser],methods=[POST]}" onto public com.sen.streamlinetask.beans.GenericResponse com.sen.streamlinetask.controller.LoginController.loginUser(com.sen.streamlinetask.entities.Users,javax.servlet.http.HttpServletRequest)
+2017-10-20 21:37:48.212  INFO 7320 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/register],methods=[POST]}" onto public com.sen.streamlinetask.beans.GenericResponse com.sen.streamlinetask.controller.LoginController.registerUser(com.sen.streamlinetask.entities.Users)
+2017-10-20 21:37:48.214  INFO 7320 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2017-10-20 21:37:48.214  INFO 7320 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2017-10-20 21:37:48.270  INFO 7320 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-10-20 21:37:48.270  INFO 7320 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-10-20 21:37:48.320  INFO 7320 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-10-20 21:37:48.662  INFO 7320 --- [main] o.s.j.e.a.AnnotationMBeanExporter        : Registering beans for JMX exposure on startup
+2017-10-20 21:37:48.706  INFO 7320 --- [main] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat started on port(s): 8080 (http)
+2017-10-20 21:37:48.710  INFO 7320 --- [main] com.sen.streamlinetask.AppStarter        : Started AppStarter in 5.181 seconds (JVM running for 5.46)

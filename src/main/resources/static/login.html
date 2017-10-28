@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Task</title>
+	<link rel="stylesheet" href="css/login.css">
+</head>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+<body>
+	<div class="wrap" ng-app="loginApp" ng-controller="loginController" ng-init="errorSwitch=false;errorMsg=''">
+		<div class="avatar">
+			<img src="./images/avatar.png">
+		</div>
+		<input type="text" placeholder="username" ng-model="uName" required>
+		<div class="bar">
+			<i></i>
+		</div>
+		<input type="password" placeholder="password" ng-model="pword" required> <a
+			href="" class="forgot_link">forgot ?</a>
+		<button ng-click="loginUserFunc()">Sign in</button>
+		
+		<div class="modal" ng-show="errorSwitch">
+			<div class="modal-content">
+				<span class="close" ng-click="closeErrorMessage()">&times;</span>
+				<p>{{errorMsg}}</p>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript" src="./js/appcontroller.js"></script>
+	<script type="text/javascript" src="./js/appservice.js"></script>
+
+</body>
+</html>
