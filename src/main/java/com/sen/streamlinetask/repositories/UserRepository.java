@@ -9,4 +9,6 @@ import com.sen.streamlinetask.entities.Users;
 public interface UserRepository extends CrudRepository<Users, Integer> {
 
 	public List<Users> findByUserNameAndPassword(String userName, String password);
+	
+	public Users findByUserName(String userName);
 }

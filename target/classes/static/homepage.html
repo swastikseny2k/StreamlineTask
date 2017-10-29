@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css'>
+
+	<link rel="stylesheet" href="css/reset.css"> <!-- CSS reset -->
+	<link rel="stylesheet" href="css/appstyle.css"> <!-- Resource style -->
+	<script src="js/modernizr.js"></script> <!-- Modernizr -->
+  	
+	<title>Streamline Task</title>
+</head>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+<body>
+<div ng-app="homepageApp" ng-controller="homepageController" ng-init="usrName='Guest'">
+	<header class="cd-header">
+		
+		<div class="cd-user-welcome">Welcome {{usrName}}</div>
+
+		<nav class="cd-primary-nav">
+			<ul>
+				<li><a href="#0">Home</a></li>
+				<li><a href="#" ng-click="logout()">Logout</a></li>
+			</ul>
+		</nav> <!-- .cd-primary-nav -->
+	</header>
+
+	<section class="cd-hero">
+		<div class="cd-slider-nav">
+			<nav>
+				<span class="cd-marker item-1"></span>
+				
+				<ul>
+					<li class="selected"><a href="#0">Today {{today}}</a></li>
+					<li><a href="#0">Tomorrow {{tomorrow}}</a></li>
+					<li><a href="#0">Future</a></li>
+					<li><a href="#0">Archived</a></li>
+				</ul>
+			</nav> 
+		</div> <!-- .cd-slider-nav -->
+		<ul class="cd-hero-slider">
+			<li class="selected">
+				<div class="cd-full-width">
+					
+				</div> <!-- .cd-full-width -->
+			</li>
+
+			<li>
+				<div class="cd-full-width">
+					
+				</div> <!-- .cd-full-width -->
+			</li>
+
+			<li>
+				<div class="cd-full-width">
+					
+				</div> <!-- .cd-full-width -->
+			</li>
+
+			<li>
+				<div class="cd-half-width cd-img-container">
+					
+				</div> <!-- .cd-half-width.cd-img-container -->
+
+				<div class="cd-half-width">
+					
+				</div> <!-- .cd-half-width -->
+				
+			</li>
+		</ul> <!-- .cd-hero-slider -->
+	</section> <!-- .cd-hero -->
+	<main class="cd-main-content">
+		<nobr>
+			<input type="text" placeholder="Enter task description" required/>
+			<select required>
+				<option value="">-- Priority --</option>
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
+				<option value="5">5</option>
+			</select>
+		</nobr>
+		<br>
+		<nobr>
+			<input type="date" ng-model="date" required/>
+			<span style="font-size: 2rem; line-height: 3.75;">Follow up required? <input type="checkbox" /> </span>
+		</nobr>
+		<br>
+		<input type="button" value="Add Task" ng-click="addTask()"/>
+	</main>
+</div>
+<script src="js/jquery-2.1.1.js"></script>
+<script src="js/main.js"></script> <!-- Resource jQuery -->
+<script type="text/javascript" src="./js/appcontroller.js"></script>
+<script type="text/javascript" src="./js/appservice.js"></script>
+</body>
+</html>
