@@ -35,6 +35,7 @@ public class UserService {
 			
 			session.setAttribute("NAME", users.get(0).getFirstName() + " " + users.get(0).getLastName());
 			session.setAttribute("USERNAME", users.get(0).getUserName());
+			session.setAttribute("USERID", users.get(0).getUserID());
 			
 		} else {
 			response.setResponseCode(AppConstants.FAIL_CODE);

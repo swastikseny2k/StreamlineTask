@@ -45,6 +45,8 @@ public class Tasks {
 	@Column(name="USER_ID")
 	private Integer userID;
 	
+	/*private boolean isFollowupRequired;*/
+	
 	public Integer getTaskID() {
 		return taskID;
 	}
@@ -124,4 +126,13 @@ public class Tasks {
 	public void setUserID(Integer userID) {
 		this.userID = userID;
 	}
+
+	/*public boolean getIsFollowupRequired() {
+		return isFollowupRequired;
+	}
+
+	public void setIsFollowupRequired(boolean isFollowupRequired) {
+		this.isFollowupRequired = isFollowupRequired;
+	}*/
+	
 }

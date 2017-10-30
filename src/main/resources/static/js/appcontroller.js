@@ -104,7 +104,37 @@ homepageapp.controller('homepageController', function ($scope, $http, $window, $
 	
 	$scope.addTask = function() {
 	
-		$http.post("addtask")
+		var taskAddPayload = {"taskDesc": $scope.taskdesc, "priority": $scope.priority, "scheduleDate" : $scope.scheduledate/*, "isFollowupRequired": $scope.followupreq*/};
+		var taskAddJson = JSON.stringify(taskAddPayload);
+		
+		alert(taskAddJson);
+		
+		$http.post("/addtask", taskAddJson)
+		.then(function (response){
+			
+			//console.log(response.data.responseCode);
+			
+			if(response.data.responseCode == 1) {
+				
+				alert("data saved");
+				//$http.defaults.headers.common['Authorization'] = 'Basic ' + authdata; 
+	            //$cookieStore.put('globals', $rootScope.globals);
+				//$window.location.href = landingUrl;
+			} /*else {
+				//alert($scope.errorMsg);
+				$scope.errorMsg = "Invalid Username or Password";
+				$scope.errorSwitch = true;
+				//alert($scope.errorMsg);
+			}*/
+			
+		}, function (response) {
+			/*if(response.status == 403) {
+				
+				$scope.errorMsg = "Unauthorized access";
+				$scope.errorSwitch = true;
+			}*/
+			alert("data not saved");
+		});
 	}
 });
 

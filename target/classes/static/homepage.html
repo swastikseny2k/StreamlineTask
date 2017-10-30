@@ -73,8 +73,8 @@
 	</section> <!-- .cd-hero -->
 	<main class="cd-main-content">
 		<nobr>
-			<input type="text" placeholder="Enter task description" required/>
-			<select required>
+			<input type="text" placeholder="Enter task description" required ng-model="taskdesc"/>
+			<select ng-model="priority" required>
 				<option value="">-- Priority --</option>
 				<option value="1">1</option>
 				<option value="2">2</option>
@@ -85,8 +85,8 @@
 		</nobr>
 		<br>
 		<nobr>
-			<input type="date" ng-model="date" required/>
-			<span style="font-size: 2rem; line-height: 3.75;">Follow up required? <input type="checkbox" /> </span>
+			<input type="date" ng-model="scheduledate" required/>
+			<span style="font-size: 2rem; line-height: 3.75;">Follow up required? <input type="checkbox" ng-model="followupreq"/> </span>
 		</nobr>
 		<br>
 		<input type="button" value="Add Task" ng-click="addTask()"/>

@@ -2,6 +2,7 @@ package com.sen.streamlinetask.services;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sen.streamlinetask.beans.AppConstants;
@@ -13,12 +14,14 @@ import com.sen.streamlinetask.utils.AppUtil;
 @Service
 public class TaskService {
 
+	@Autowired
 	private TaskRepository taskRepository;
 
 	public GenericResponse addTask(Tasks task, HttpSession session) {
 		GenericResponse response = new GenericResponse();
 
 		if (task.getTaskDesc() != null && task.getScheduleDate() != null) {
+			task.setUserID((Integer)session.getAttribute("USERID"));
 			task.setCreatedDate(AppUtil.getCurrentTime());
 			task.setLastUpdatedDate(AppUtil.getCurrentTime());
 			task.setCreatedBy((String)session.getAttribute("USERNAME"));
