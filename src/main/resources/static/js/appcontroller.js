@@ -76,7 +76,7 @@ homepageapp.controller('homepageController', function ($scope, $http, $window, $
 	
 	$scope.logout = function() {
 		
-		$http.post("/logout", "")
+		$http.get("/logout")
 		.then(function (response){
 			
 			//console.log(response.data.responseCode);
@@ -100,6 +100,11 @@ homepageapp.controller('homepageController', function ($scope, $http, $window, $
 				$scope.errorSwitch = true;
 			}
 		});
+	}
+	
+	$scope.addTask = function() {
+	
+		$http.post("addtask")
 	}
 });
 

@@ -31,7 +31,7 @@ public class UserRestController {
 		return userService.registerUser(user);
 	}
 	
-	@RequestMapping(value="/logout", method=RequestMethod.POST)
+	@RequestMapping(value="/logout", method=RequestMethod.GET)
 	public GenericResponse logout(HttpServletRequest request) {
 		
 		request.getSession().invalidate();
