@@ -41,4 +41,14 @@ public class TaskService {
 
 		return response;
 	}
+
+	public GenericResponse getTodaysTasks(Integer userID) {
+		GenericResponse response = new GenericResponse();
+		response.setResponseCode(AppConstants.SUCCESS_CODE);
+		response.setResponse(AppConstants.SUCCESS);
+		
+		response.setResponseData(taskRepository.getTodayTaskUsingUserID(userID));
+		
+		return response																																																							;
+	}
 }

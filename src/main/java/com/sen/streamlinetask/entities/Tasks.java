@@ -15,7 +15,7 @@ public class Tasks {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="TAK_ID")
+	@Column(name="TASK_ID")
 	private Integer taskID;
 	
 	@Column(name="TASK_DESC")

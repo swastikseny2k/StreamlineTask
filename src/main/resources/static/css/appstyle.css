@@ -259,6 +259,7 @@ Single slide style
   -ms-transform: translateZ(0);
   -o-transform: translateZ(0);
   transform: translateZ(0);
+  overflow: auto;
 }
 .cd-hero-slider .cd-img-container {
   /* hide image on mobile device */

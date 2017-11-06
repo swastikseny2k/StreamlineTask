@@ -1,7 +1,7 @@
 var loginapp = angular.module('loginApp', []);
 
 loginapp.controller('loginController', function($scope, $http, $location, $window, $rootScope) {
-	
+
 	$scope.loginUserFunc = function() {
 		
 		var url = "/loginuser";
@@ -31,7 +31,7 @@ loginapp.controller('loginController', function($scope, $http, $location, $windo
 			.then(function (response){
 				
 				//console.log(response.data.responseCode);
-				
+				//alert(JSON.stringify(response.data));
 				if(response.data.responseCode == 1) {
 					
 					//$http.defaults.headers.common['Authorization'] = 'Basic ' + authdata; 
@@ -61,7 +61,6 @@ loginapp.controller('loginController', function($scope, $http, $location, $windo
 	
 	
 	$scope.closeErrorMessage = function() {
-		
 		$scope.errorMsg = "";
 		$scope.errorSwitch = false;
 	}
@@ -69,9 +68,11 @@ loginapp.controller('loginController', function($scope, $http, $location, $windo
 
 var homepageapp = angular.module('homepageApp', []);
 
-homepageapp.controller('homepageController', function ($scope, $http, $window, $location) {
+homepageapp.controller('homepageController', function ($scope, $http, $window, $location, $timeout, $filter) {
 	
-	$scope.date = new Date();
+	$scope.todayTasks=[];
+	var today = new Date();
+	$scope.date = today;
 	var landingUrl = "http://" + $window.location.host + "/index.html";
 	
 	$scope.logout = function() {
@@ -107,7 +108,7 @@ homepageapp.controller('homepageController', function ($scope, $http, $window, $
 		var taskAddPayload = {"taskDesc": $scope.taskdesc, "priority": $scope.priority, "scheduleDate" : $scope.scheduledate/*, "isFollowupRequired": $scope.followupreq*/};
 		var taskAddJson = JSON.stringify(taskAddPayload);
 		
-		alert(taskAddJson);
+		//alert(taskAddJson);
 		
 		$http.post("/addtask", taskAddJson)
 		.then(function (response){
@@ -116,25 +117,79 @@ homepageapp.controller('homepageController', function ($scope, $http, $window, $
 			
 			if(response.data.responseCode == 1) {
 				
-				alert("data saved");
-				//$http.defaults.headers.common['Authorization'] = 'Basic ' + authdata; 
-	            //$cookieStore.put('globals', $rootScope.globals);
-				//$window.location.href = landingUrl;
-			} /*else {
-				//alert($scope.errorMsg);
-				$scope.errorMsg = "Invalid Username or Password";
+				$scope.errorMsg = "Task created";
 				$scope.errorSwitch = true;
-				//alert($scope.errorMsg);
-			}*/
+				//alert($filter('date')(response.data.responseData.scheduleDate, "dd-MM-yyyy"));
+				//alert($filter('date')(today, "dd-MM-yyyy"));
+				//alert($filter('date')(response.data.responseData.scheduleDate, "dd-MM-yyyy") == $filter('date')(today, "dd-MM-yyyy"));
+				if($filter('date')(response.data.responseData.scheduleDate, "dd-MM-yyyy") == $filter('date')(today, "dd-MM-yyyy")) {
+					var newTask = {};
+					
+					newTask.taskID = response.data.responseData.taskID;
+					newTask.taskDesc = response.data.responseData.taskDesc;
+					newTask.priority = response.data.responseData.priority;
+					newTask.scheduleDate = response.data.responseData.scheduleDate;
+					newTask.userID = response.data.responseData.userID;
+					
+					$scope.todayTasks.push(newTask);
+				}
+				
+				$timeout(function() {
+					$scope.errorMsg = "";
+					$scope.errorSwitch = false;
+				}, 1000);
+			} else {
+				$scope.errorMsg = "Task could not be created";
+				$scope.errorSwitch = true;
+				
+
+				$timeout(function() {
+					//alert("time to close" + $scope.errorSwitch);
+					$scope.errorMsg = "";
+					$scope.errorSwitch = false;
+					//alert("closed" + $scope.errorSwitch);
+				}, 1000);
+			}
 			
 		}, function (response) {
-			/*if(response.status == 403) {
-				
-				$scope.errorMsg = "Unauthorized access";
-				$scope.errorSwitch = true;
-			}*/
-			alert("data not saved");
+			
+			$scope.errorMsg = "Task could not be created";
+			$scope.errorSwitch = true;
+			
+
+			$timeout(function() {
+				$scope.errorMsg = "";
+				$scope.errorSwitch = false;
+			}, 1000);
 		});
+	}
+	
+	$scope.todayTasks=[];
+	
+	$http.get("gettodaytask")
+	.then(function(response) {
+		
+		if(response.data.responseCode == 1) {
+			
+			for(var i=0; i< response.data.responseData.length; i++) {
+				var newTask = {};
+				
+				newTask.taskID = response.data.responseData[i].taskID;
+				newTask.taskDesc = response.data.responseData[i].taskDesc;
+				newTask.priority = response.data.responseData[i].priority;
+				newTask.scheduleDate = response.data.responseData[i].scheduleDate;
+				newTask.userID = response.data.responseData[i].userID;
+				//alert(newTask);
+				$scope.todayTasks.push(newTask);
+			}
+
+		}
+	});
+	
+	$scope.closeErrorMessage = function() {
+		
+		$scope.errorMsg = "";
+		$scope.errorSwitch = false;
 	}
 });
 

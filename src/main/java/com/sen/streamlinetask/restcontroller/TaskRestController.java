@@ -22,4 +22,9 @@ public class TaskRestController {
 	public GenericResponse addTask(@RequestBody Tasks task, HttpSession session) {
 		return taskService.addTask(task, session);
 	}
+	
+	@RequestMapping(value="/gettodaytask", method=RequestMethod.GET)
+	public GenericResponse getTodaysTasks(HttpSession session) {
+		return taskService.getTodaysTasks((Integer)session.getAttribute("USERID"));
+	}
 }

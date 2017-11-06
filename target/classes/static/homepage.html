@@ -8,13 +8,14 @@
 
 	<link rel="stylesheet" href="css/reset.css"> <!-- CSS reset -->
 	<link rel="stylesheet" href="css/appstyle.css"> <!-- Resource style -->
+	<link rel="stylesheet" href="css/homepage.css">
 	<script src="js/modernizr.js"></script> <!-- Modernizr -->
   	
 	<title>Streamline Task</title>
 </head>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 <body>
-<div ng-app="homepageApp" ng-controller="homepageController" ng-init="usrName='Guest';">
+<div ng-app="homepageApp" ng-controller="homepageController" ng-init="usrName='Guest';errorSwitch=false;errorMsg=''">
 	<header class="cd-header">
 		
 		<div class="cd-user-welcome">Welcome {{usrName}}</div>
@@ -34,22 +35,26 @@
 				
 				<ul>
 					<li class="selected"><a href="#0">Today {{today}}</a></li>
-					<li><a href="#0">Tomorrow {{tomorrow}}</a></li>
-					<li><a href="#0">Future</a></li>
-					<li><a href="#0">Archived</a></li>
+					<li><a href="#0">Search Task</a></li>
+					<li><a href="#0">Create WorkFlow</a></li>
 				</ul>
 			</nav> 
 		</div> <!-- .cd-slider-nav -->
 		<ul class="cd-hero-slider">
 			<li class="selected">
 				<div class="cd-full-width">
-					
-				</div> <!-- .cd-full-width -->
-			</li>
-
-			<li>
-				<div class="cd-full-width">
-					
+						<table class="tablestyle">
+							<thead>
+								<td style="padding-top: 10px; padding-bottom: 10px;">Task</td>
+								<td>Priority</td>
+								<td>Actions</td>
+							</thead>
+							<tr ng-repeat="t in todayTasks | orderBy:'priority'">
+								<td style="padding-left: 25px; padding-top: 10px; padding-bottom: 10px; border-bottom: 1px solid #ddd; width: 60%">{{t.taskDesc}}</td>
+								<td style="padding-left: 25px;text-align: center; border-bottom: 1px solid #ddd">{{t.priority}}</td>
+								<td style="padding-left: 10px;text-align: center; border-bottom: 1px solid #ddd">ADD/Remove</td>
+							</tr>
+						</table>
 				</div> <!-- .cd-full-width -->
 			</li>
 
@@ -84,17 +89,24 @@
 			</select>
 		</nobr>
 		<br>
-		<nobr>
-			<input type="date" ng-model="scheduledate" required/>
+		<input type="date" ng-model="scheduledate" required />
+		<!-- <nobr>
+			
 			<span style="font-size: 2rem; line-height: 3.75;">Follow up required? <input type="checkbox" ng-model="followupreq"/> </span>
-		</nobr>
+		</nobr> -->
 		<br>
 		<input type="button" value="Add Task" ng-click="addTask()"/>
 	</main>
+	
+	<div class="modal" ng-show="errorSwitch">
+		<div class="modal-content">
+			<span class="close" ng-click="closeErrorMessage()">&times;</span>
+			<p>{{errorMsg}}</p>
+		</div>
+	</div>
 </div>
 <script src="js/jquery-2.1.1.js"></script>
 <script src="js/main.js"></script> <!-- Resource jQuery -->
 <script type="text/javascript" src="./js/appcontroller.js"></script>
-<script type="text/javascript" src="./js/appservice.js"></script>
 </body>
 </html>
