@@ -7,10 +7,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.sen.streamlinetask.services.UserService;
 
-@Controller
+//@Controller
 public class LoginController {
 
-	@Autowired
+	/*@Autowired
 	private UserService userService;
 	
 	@RequestMapping(value="/showhomepage", method=RequestMethod.GET)
@@ -21,5 +21,5 @@ public class LoginController {
 	@RequestMapping(value="/", method=RequestMethod.GET)
 	public String openLoginPage() {
 		return "login";
-	}
+	}*/
 }

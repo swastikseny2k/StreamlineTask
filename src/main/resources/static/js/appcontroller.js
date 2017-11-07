@@ -72,9 +72,31 @@ homepageapp.controller('homepageController', function ($scope, $http, $window, $
 	
 	$scope.todayTasks=[];
 	var today = new Date();
-	$scope.date = today;
+	$scope.scheduledate = today;
 	var landingUrl = "http://" + $window.location.host + "/index.html";
 	
+		
+	$http.get("/getusername")
+	.then(function (response){
+		
+		//console.log(response.data.responseCode);
+		
+		if(response.data.responseCode == 0) {
+			
+			//$http.defaults.headers.common['Authorization'] = 'Basic ' + authdata; 
+            //$cookieStore.put('globals', $rootScope.globals);
+			$window.location.href = landingUrl;
+		} else {
+			$scope.usrName = response.data.responseData;
+		}
+		
+	}, function (response) {
+		if(response.status == 403) {
+			
+			$window.location.href = landingUrl;
+		}
+	});
+
 	$scope.logout = function() {
 		
 		$http.get("/logout")
@@ -105,7 +127,7 @@ homepageapp.controller('homepageController', function ($scope, $http, $window, $
 	
 	$scope.addTask = function() {
 	
-		var taskAddPayload = {"taskDesc": $scope.taskdesc, "priority": $scope.priority, "scheduleDate" : $scope.scheduledate/*, "isFollowupRequired": $scope.followupreq*/};
+		var taskAddPayload = {"taskDesc": $scope.taskdesc, "priority": $scope.priority, "scheduleDate" : $scope.scheduledate, "taskStatus": 1};
 		var taskAddJson = JSON.stringify(taskAddPayload);
 		
 		//alert(taskAddJson);
@@ -130,9 +152,14 @@ homepageapp.controller('homepageController', function ($scope, $http, $window, $
 					newTask.priority = response.data.responseData.priority;
 					newTask.scheduleDate = response.data.responseData.scheduleDate;
 					newTask.userID = response.data.responseData.userID;
+					newTask.taskStatus = response.data.responseData.taskStatus;
 					
 					$scope.todayTasks.push(newTask);
 				}
+				
+				$scope.taskdesc = "";
+				$scope.priority = "";
+				$scope.scheduledate = today;
 				
 				$timeout(function() {
 					$scope.errorMsg = "";
@@ -164,6 +191,122 @@ homepageapp.controller('homepageController', function ($scope, $http, $window, $
 		});
 	}
 	
+	$scope.markAsComplete = function(idx) {
+		
+		var taskAddPayload = {"taskID": idx, "taskStatus": 2};
+		var taskAddJson = JSON.stringify(taskAddPayload);
+		
+		//alert(taskAddJson);
+		
+		$http.post("/updatetaskstatus", taskAddJson)
+		.then(function (response){
+			
+			//console.log(response.data.responseCode);
+			
+			if(response.data.responseCode == 1) {
+				
+				$scope.errorMsg = "Task marked as completed";
+				$scope.errorSwitch = true;
+				
+				var updatedList = [];
+
+				for(var i=0; i<$scope.todayTasks.length; i++) {
+					
+					if($scope.todayTasks[i].taskID != idx) {
+						updatedList.push($scope.todayTasks[i]);
+					}
+				}
+				
+				$scope.todayTasks = updatedList;
+				
+				$timeout(function() {
+					$scope.errorMsg = "";
+					$scope.errorSwitch = false;
+				}, 1000);
+			} else {
+				$scope.errorMsg = "Unable to mark as complete";
+				$scope.errorSwitch = true;
+				
+
+				$timeout(function() {
+					//alert("time to close" + $scope.errorSwitch);
+					$scope.errorMsg = "";
+					$scope.errorSwitch = false;
+					//alert("closed" + $scope.errorSwitch);
+				}, 1000);
+			}
+			
+		}, function (response) {
+			
+			$scope.errorMsg = "Unable to mark as complete";
+			$scope.errorSwitch = true;
+			
+
+			$timeout(function() {
+				$scope.errorMsg = "";
+				$scope.errorSwitch = false;
+			}, 1000);
+		});
+	}
+	
+	$scope.markAsDeleted = function(idx) {
+		
+		var taskAddPayload = {"taskID": idx, "taskStatus": 3};
+		var taskAddJson = JSON.stringify(taskAddPayload);
+		
+		//alert(taskAddJson);
+		
+		$http.post("/updatetaskstatus", taskAddJson)
+		.then(function (response){
+			
+			//console.log(response.data.responseCode);
+			
+			if(response.data.responseCode == 1) {
+				
+				$scope.errorMsg = "Task marked as deleted";
+				$scope.errorSwitch = true;
+
+				var updatedList = [];
+
+				for(var i=0; i<$scope.todayTasks.length; i++) {
+					
+					if($scope.todayTasks[i].taskID != idx) {
+						updatedList.push($scope.todayTasks[i]);
+					}
+				}
+				
+				$scope.todayTasks = updatedList;
+				
+				$timeout(function() {
+					$scope.errorMsg = "";
+					$scope.errorSwitch = false;
+				}, 1000);
+			} else {
+				$scope.errorMsg = "Unable to mark as deleted";
+				$scope.errorSwitch = true;
+				
+
+				$timeout(function() {
+					//alert("time to close" + $scope.errorSwitch);
+					$scope.errorMsg = "";
+					$scope.errorSwitch = false;
+					//alert("closed" + $scope.errorSwitch);
+				}, 1000);
+			}
+			
+		}, function (response) {
+			
+			$scope.errorMsg = "Unable to mark as deleted";
+			$scope.errorSwitch = true;
+			
+
+			$timeout(function() {
+				$scope.errorMsg = "";
+				$scope.errorSwitch = false;
+			}, 1000);
+		});
+	}
+	
 	$scope.todayTasks=[];
 	
 	$http.get("gettodaytask")
@@ -173,12 +316,13 @@ homepageapp.controller('homepageController', function ($scope, $http, $window, $
 			
 			for(var i=0; i< response.data.responseData.length; i++) {
 				var newTask = {};
-				
+				//alert(response.data.responseData[i].taskStatus);
 				newTask.taskID = response.data.responseData[i].taskID;
 				newTask.taskDesc = response.data.responseData[i].taskDesc;
 				newTask.priority = response.data.responseData[i].priority;
 				newTask.scheduleDate = response.data.responseData[i].scheduleDate;
 				newTask.userID = response.data.responseData[i].userID;
+				newTask.taskStatus = response.data.responseData[i].taskStatus;
 				//alert(newTask);
 				$scope.todayTasks.push(newTask);
 			}

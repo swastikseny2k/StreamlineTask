@@ -27,8 +27,8 @@ public class Tasks {
 	@Column(name="SCHEDULE_DATE")
 	private Date scheduleDate;
 	
-	@Column(name="FOLLOWUP_TASK_ID")
-	private Integer followUpTaskID;
+	@Column(name="TASK_STATUS")
+	private Integer taskStatus;
 	
 	@Column(name="CREATED_DATE")
 	private Date createdDate;
@@ -79,12 +79,12 @@ public class Tasks {
 		this.scheduleDate = scheduleDate;
 	}
 
-	public Integer getFollowUpTaskID() {
-		return followUpTaskID;
+	public Integer getTaskStatus() {
+		return taskStatus;
 	}
 
-	public void setFollowUpTaskID(Integer followUpTaskID) {
-		this.followUpTaskID = followUpTaskID;
+	public void setTaskStatus(Integer taskStatus) {
+		this.taskStatus = taskStatus;
 	}
 
 	public Date getCreatedDate() {

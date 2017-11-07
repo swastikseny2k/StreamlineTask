@@ -22,7 +22,7 @@
 
 		<nav class="cd-primary-nav">
 			<ul>
-				<li><a href="#">Home</a></li>
+				<li><a href="homepage.html">Home</a></li>
 				<li><a href="#" ng-click="logout()">Logout</a></li>
 			</ul>
 		</nav> <!-- .cd-primary-nav -->
@@ -52,7 +52,10 @@
 							<tr ng-repeat="t in todayTasks | orderBy:'priority'">
 								<td style="padding-left: 25px; padding-top: 10px; padding-bottom: 10px; border-bottom: 1px solid #ddd; width: 60%">{{t.taskDesc}}</td>
 								<td style="padding-left: 25px;text-align: center; border-bottom: 1px solid #ddd">{{t.priority}}</td>
-								<td style="padding-left: 10px;text-align: center; border-bottom: 1px solid #ddd">ADD/Remove</td>
+								<td style="padding-left: 10px;text-align: center; border-bottom: 1px solid #ddd; padding-top: 10px;">
+									<img src="images/right1.jpg" style="cursor: pointer;" alt="Complete" width="40" height="40" title="Mark as complete" ng-click="markAsComplete(t.taskID)"> &nbsp; 
+									<img src="images/wrong1.jpg" style="cursor: pointer;" alt="Delete" width="40" height="40" title="Delete task" ng-click="markAsDeleted(t.taskID)">
+								</td>
 							</tr>
 						</table>
 				</div> <!-- .cd-full-width -->
@@ -60,7 +63,7 @@
 
 			<li>
 				<div class="cd-full-width">
-					
+					<p>Coming Soon</p>
 				</div> <!-- .cd-full-width -->
 			</li>
 
@@ -70,7 +73,7 @@
 				</div> <!-- .cd-half-width.cd-img-container -->
 
 				<div class="cd-half-width">
-					
+					<p>Coming Soon</p>
 				</div> <!-- .cd-half-width -->
 				
 			</li>

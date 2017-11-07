@@ -45,7 +45,7 @@
 }
 
 .tablestyle thead{
-	background: #3465a4;
+	background: #babdb6;
 	font-weight: bold;
 	text-align: center;
 	font-size: 25px;
@@ -53,10 +53,11 @@
 }
 .tablestyle tbody{
 	border: 1px solid black;
-	background: #babdb6;
+	background: white;
 	font-weight: normal;
 	text-align: left;
 	border: 1px solid #ddd;
+	font-size: 20px;
 }
 
 /* .tablestyle tr{

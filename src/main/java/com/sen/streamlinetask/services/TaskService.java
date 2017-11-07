@@ -51,4 +51,16 @@ public class TaskService {
 		
 		return response																																																							;
 	}
+
+	public GenericResponse updateTaskStatus(Tasks task) {
+
+		GenericResponse response = new GenericResponse();
+		
+		taskRepository.updateTaskStatus(task.getTaskStatus(), task.getTaskID());
+		
+		response.setResponseCode(AppConstants.SUCCESS_CODE);
+		response.setResponse(AppConstants.SUCCESS);
+		
+		return response;
+	}
 }

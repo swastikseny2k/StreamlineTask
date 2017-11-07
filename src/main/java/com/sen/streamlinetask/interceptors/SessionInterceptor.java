@@ -18,8 +18,9 @@ public class SessionInterceptor extends HandlerInterceptorAdapter {
 	static {
 		excludedURI.add("/loginuser");
 		excludedURI.add("/register");
-		excludedURI.add("/error");
+		//excludedURI.add("/error");
 		excludedURI.add("/logout");
+		excludedURI.add("/");
 	}
 	
 	@Override
@@ -37,7 +38,8 @@ public class SessionInterceptor extends HandlerInterceptorAdapter {
 								|| "".equalsIgnoreCase(session.getAttribute("USERNAME").toString())))) {
 				
 				proceedProcessing = false;
-				response.sendRedirect("index.html");
+				response.setStatus(403);
+				//response.sendRedirect("index.html");
 				
 			} else {
 			
@@ -50,8 +52,8 @@ public class SessionInterceptor extends HandlerInterceptorAdapter {
 					
 					response.sendRedirect("/CricScorez/games/noaccesspage");
 				}*/
-				
-				/*response.sendRedirect("index.html");*/
+				//proceedProcessing = false;
+				//response.sendRedirect("index.html");
 			}
 			
 		}

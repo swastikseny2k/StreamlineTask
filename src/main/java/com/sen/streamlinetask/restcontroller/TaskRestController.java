@@ -27,4 +27,9 @@ public class TaskRestController {
 	public GenericResponse getTodaysTasks(HttpSession session) {
 		return taskService.getTodaysTasks((Integer)session.getAttribute("USERID"));
 	}
+	
+	@RequestMapping(value="/updatetaskstatus", method=RequestMethod.POST)
+	public GenericResponse updateTaskStatus(@RequestBody Tasks task) {
+		return taskService.updateTaskStatus(task);
+	}
 }
