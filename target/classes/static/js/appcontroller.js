@@ -330,6 +330,44 @@ homepageapp.controller('homepageController', function ($scope, $http, $window, $
 		}
 	});
 	
+	$scope.searchTaskByDesc = function() {
+		
+		var input = $scope.searchTaskField;
+		$scope.searchedTasks=[];
+		
+		if(input.length >= 3) {
+			
+			$http.get("gettaskbydesc?desc=" + input)
+				.then(function(response) {
+				
+					if(response.data.responseCode == 1) {
+						
+						for(var i=0; i< response.data.responseData.length; i++) {
+							var newTask = {};
+							//alert(response.data.responseData[i].taskStatus);
+							newTask.taskID = response.data.responseData[i].taskID;
+							newTask.taskDesc = response.data.responseData[i].taskDesc;
+							newTask.priority = response.data.responseData[i].priority;
+							newTask.scheduleDate = $filter('date')(response.data.responseData[i].scheduleDate, "dd-MM-yyyy");
+							newTask.userID = response.data.responseData[i].userID;
+							newTask.taskStatus = response.data.responseData[i].taskStatus;
+							
+							if(response.data.responseData[i].taskStatus == 1) {
+								newTask.taskStatusStr = "Open";
+							} else if(response.data.responseData[i].taskStatus == 2) {
+								newTask.taskStatusStr = "Completed";
+							} else if(response.data.responseData[i].taskStatus == 3) {
+								newTask.taskStatusStr = "Deleted";
+							}
+							//alert(newTask);
+							$scope.searchedTasks.push(newTask);
+						}
+	
+					}
+			});
+		}
+	}
+	
 	$scope.closeErrorMessage = function() {
 		
 		$scope.errorMsg = "";

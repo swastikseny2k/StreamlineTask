@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sen.streamlinetask.beans.GenericResponse;
@@ -31,5 +32,10 @@ public class TaskRestController {
 	@RequestMapping(value="/updatetaskstatus", method=RequestMethod.POST)
 	public GenericResponse updateTaskStatus(@RequestBody Tasks task) {
 		return taskService.updateTaskStatus(task);
+	}
+	
+	@RequestMapping(value="/gettaskbydesc", method=RequestMethod.GET)
+	public GenericResponse searchTaskByDesc(@RequestParam("desc") String desc) {
+		return taskService.findTaskByDescription(desc);
 	}
 }

@@ -63,4 +63,15 @@ public class TaskService {
 		
 		return response;
 	}
+
+	public GenericResponse findTaskByDescription(String desc) {
+
+		GenericResponse response = new GenericResponse();
+		response.setResponseCode(AppConstants.SUCCESS_CODE);
+		response.setResponse(AppConstants.SUCCESS);
+		
+		response.setResponseData(taskRepository.findTaskByDescription(desc));
+		
+		return response;
+	}
 }

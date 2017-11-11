@@ -13,11 +13,14 @@ import com.sen.streamlinetask.entities.Tasks;
 @Transactional
 public interface TaskRepository extends CrudRepository<Tasks, Integer>{
 
-	@Query("SELECT t FROM Tasks t WHERE t.userID=:userID AND DATE(t.scheduleDate)=DATE(SYSDATE()) AND t.taskStatus=1")
+	@Query("SELECT t FROM Tasks t WHERE t.userID=:userID AND DATE(t.scheduleDate)<=DATE(SYSDATE()) AND t.taskStatus=1")
 	public List<Tasks> getTodayTaskUsingUserID(@Param("userID") Integer userID);
 
 	@Modifying
 	@Query("UPDATE Tasks SET taskStatus=:taskStatus WHERE taskID=:taskID")
 	public void updateTaskStatus(@Param("taskStatus") Integer taskStatus, @Param("taskID") Integer taskID);
+
+	@Query("SELECT t FROM Tasks t WHERE t.taskDesc LIKE %:desc%")
+	public List<Tasks> findTaskByDescription(@Param("desc") String desc);
 
 }

@@ -10,7 +10,7 @@
 	<link rel="stylesheet" href="css/appstyle.css"> <!-- Resource style -->
 	<link rel="stylesheet" href="css/homepage.css">
 	<script src="js/modernizr.js"></script> <!-- Modernizr -->
-  	
+  	<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
 	<title>Streamline Task</title>
 </head>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
@@ -63,7 +63,23 @@
 
 			<li>
 				<div class="cd-full-width">
-					<p>Coming Soon</p>
+					<table class="tablestyle">
+						<thead>
+							<td style="height: 50px" colspan="3">
+								<input type="text" style="width: 100%; height: 100%; font-size: 2rem; padding-left: 10px;" ng-model="searchTaskField" placeholder="Enter Task Description" ng-change="searchTaskByDesc()"/>
+							</td>
+						</thead>
+						<thead>
+							<td style="padding-top: 10px; padding-bottom: 10px;">Task</td>
+							<td>Status</td>
+							<td>Date</td>
+						</thead>
+						<tr ng-repeat="t in searchedTasks | orderBy:'-scheduleDate'">
+							<td style="padding-left: 25px; padding-top: 10px; padding-bottom: 10px; border-bottom: 1px solid #ddd; width: 60%">{{t.taskDesc}}</td>
+							<td style="padding-left: 25px;text-align: center; border-bottom: 1px solid #ddd">{{t.taskStatusStr}}</td>
+							<td style="padding-left: 25px;text-align: center; border-bottom: 1px solid #ddd">{{t.scheduleDate}}</td>
+						</tr>
+					</table>
 				</div> <!-- .cd-full-width -->
 			</li>
 
