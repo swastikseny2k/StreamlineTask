@@ -46,25 +46,40 @@ public class UserService {
 		return response;
 	}
 
-	public GenericResponse registerUser(Users user) {
+	public GenericResponse registerUser(Users user, HttpServletRequest request) {
 		
-		GenericResponse response = new GenericResponse();
+		GenericResponse response = new GenericResponse(); 
 		
-		if(user.getUserName() != null && user.getPassword() != null) {
-			user.setCreatedDate(AppUtil.getCurrentTime());
-			user.setLastUpdatedDate(AppUtil.getCurrentTime());
-			user.setCreatedBy(user.getUserName());
-			user.setLastUpdatedBy(user.getUserName());
+		if(user.getUserName() != null && user.getPassword() != null
+				&& null != user.getFirstName() && null != user.getLastName()) {
+			Users existingUser = userRepository.findByUserName(user.getUserName());
+			if(null != existingUser && existingUser.getUserID() != 0) {
+				response.setResponseCode(AppConstants.FAIL_CODE);
+				response.setResponse("Username already exists");
+				response.setResponseData(user);
+			} else {
+				user.setCreatedDate(AppUtil.getCurrentTime());
+				user.setLastUpdatedDate(AppUtil.getCurrentTime());
+				user.setCreatedBy(user.getUserName());
+				user.setLastUpdatedBy(user.getUserName());
+				
+				userRepository.save(user);
+				
+				response.setResponseCode(AppConstants.SUCCESS_CODE);
+				response.setResponse(AppConstants.SUCCESS);
+				response.setResponseData(user);
+				
+				HttpSession session = request.getSession(true);
+				
+				session.setAttribute("NAME", user.getFirstName() + " " + user.getLastName());
+				session.setAttribute("USERNAME", user.getUserName());
+				session.setAttribute("USERID", user.getUserID());
+			}
 			
-			userRepository.save(user);
-			
-			response.setResponseCode(AppConstants.SUCCESS_CODE);
-			response.setResponse(AppConstants.SUCCESS);
-			response.setResponseData(user);
 		} else {
 			
 			response.setResponseCode(AppConstants.FAIL_CODE);
-			response.setResponse(AppConstants.FAILURE);
+			response.setResponse("Enter valid Username, password, firstname, lastname and email");
 			response.setResponseData(user);
 		}
 		

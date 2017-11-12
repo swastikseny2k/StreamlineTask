@@ -20,7 +20,7 @@ public interface TaskRepository extends CrudRepository<Tasks, Integer>{
 	@Query("UPDATE Tasks SET taskStatus=:taskStatus WHERE taskID=:taskID")
 	public void updateTaskStatus(@Param("taskStatus") Integer taskStatus, @Param("taskID") Integer taskID);
 
-	@Query("SELECT t FROM Tasks t WHERE t.taskDesc LIKE %:desc%")
-	public List<Tasks> findTaskByDescription(@Param("desc") String desc);
-
+	@Query("SELECT t FROM Tasks t WHERE t.taskDesc LIKE %:desc% AND t.userID=:userID")
+	public List<Tasks> findTaskByDescription(@Param("desc") String desc, @Param("userID") Integer userID);
+ 
 }

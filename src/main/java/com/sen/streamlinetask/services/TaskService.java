@@ -64,13 +64,13 @@ public class TaskService {
 		return response;
 	}
 
-	public GenericResponse findTaskByDescription(String desc) {
+	public GenericResponse findTaskByDescription(String desc, Integer userID) {
 
 		GenericResponse response = new GenericResponse();
 		response.setResponseCode(AppConstants.SUCCESS_CODE);
 		response.setResponse(AppConstants.SUCCESS);
 		
-		response.setResponseData(taskRepository.findTaskByDescription(desc));
+		response.setResponseData(taskRepository.findTaskByDescription(desc, userID));
 		
 		return response;
 	}

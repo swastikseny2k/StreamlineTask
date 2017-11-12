@@ -35,7 +35,7 @@ public class TaskRestController {
 	}
 	
 	@RequestMapping(value="/gettaskbydesc", method=RequestMethod.GET)
-	public GenericResponse searchTaskByDesc(@RequestParam("desc") String desc) {
-		return taskService.findTaskByDescription(desc);
+	public GenericResponse searchTaskByDesc(@RequestParam("desc") String desc, HttpSession session) {
+		return taskService.findTaskByDescription(desc, (Integer)session.getAttribute("USERID"));
 	}
 }

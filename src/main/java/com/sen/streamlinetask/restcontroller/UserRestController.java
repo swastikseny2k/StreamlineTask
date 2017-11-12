@@ -27,9 +27,9 @@ public class UserRestController {
 	}
 	
 	@RequestMapping(value="/register", method=RequestMethod.POST)
-	public GenericResponse registerUser(@RequestBody Users user) {
+	public GenericResponse registerUser(@RequestBody Users user, HttpServletRequest request) {
 		
-		return userService.registerUser(user);
+		return userService.registerUser(user, request); 
 	}
 	
 	@RequestMapping(value="/getusername", method=RequestMethod.GET)
