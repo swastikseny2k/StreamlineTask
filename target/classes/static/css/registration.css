@@ -10,7 +10,7 @@ body {
 	font-family: "Lato" ;
 }
 .wrap {
-	width:250px;
+	width:350px;
 	height: auto;
 	margin: auto;
 	margin-top: 10%;
@@ -39,7 +39,7 @@ body {
   	font-family:Lato ;
   	font-weight:700 ;
 	display: block;
-	height: 40px;
+	height: 30px;
 	outline: none;
 	width: calc(100% - 24px) ;
 	margin: auto;
@@ -58,10 +58,12 @@ body {
 	background: #d1d1d1;
 }
 .wrap input[type="text"] {
-	border-radius: 7px 7px 0px 0px ;
+	border-radius: 7px 7px 7px 7px ;
+	margin-top: 3px;
 }
 .wrap input[type="password"] {
-	border-radius: 0px 0px 7px 7px ;
+	border-radius: 7px 7px 7px 7px ;
+	margin-top: 3px;
 }
 .forgot_link {
 	color: #83afdf;

@@ -16,9 +16,11 @@
 		<div class="bar">
 			<i></i>
 		</div>
-		<input type="password" placeholder="password" ng-model="pword" required> <a
-			href="" class="forgot_link">forgot ?</a>
+		<input type="password" placeholder="password" ng-model="pword" required> <!-- <a
+			href="" class="forgot_link">forgot ?</a> -->
 		<button ng-click="loginUserFunc()">Sign in</button>
+		
+		<button ng-click="openRegistration()">Register</button>
 		
 		<div class="modal" ng-show="errorSwitch">
 			<div class="modal-content">

@@ -64,6 +64,79 @@ loginapp.controller('loginController', function($scope, $http, $location, $windo
 		$scope.errorMsg = "";
 		$scope.errorSwitch = false;
 	}
+	
+	$scope.openRegistration = function() {
+		$window.location.href = "http://" + $window.location.host + "/registration.html";
+	}
+});
+
+var loginapp = angular.module('registerApp', []);
+
+loginapp.controller('registerController', function($scope, $http, $location, $window, $rootScope) {
+
+	$scope.registerUser = function() {
+		
+		var url = "/register";
+		var landingUrl = "http://" + $window.location.host + "/homepage.html";
+		
+		//alert(url);
+		//alert(landingUrl);
+		
+		
+		var payload = {"userName": $scope.uName, "password": $scope.pword, "firstName": $scope.firstName, "middleName": $scope.middleName, "lastName": $scope.lastName, "email": $scope.email};  
+		var jsonPayload = JSON.stringify(payload);
+		
+		//var authdata = Base64.encode($scope.uName + ':' + $scope.pword);
+		
+		//alert(authdata);
+		
+		/*$rootScope.globals = {
+                currentUser: {
+                    username: $scope.uName,
+                    authdata: $scope.pword
+                }
+            };
+		*/
+		//alert(payload);
+		
+		$http.post(url, jsonPayload)
+			.then(function (response){
+				
+				//console.log(response.data.responseCode);
+				//alert(JSON.stringify(response.data));
+				if(response.data.responseCode == 1) {
+					
+					//$http.defaults.headers.common['Authorization'] = 'Basic ' + authdata; 
+		            //$cookieStore.put('globals', $rootScope.globals);
+					$window.location.href = landingUrl;
+				} else {
+					//alert($scope.errorMsg);
+					$scope.errorMsg = response.data.response;
+					$scope.errorSwitch = true;
+					//alert($scope.errorMsg);
+				}
+				
+			}, function (response) {
+				if(response.status == 403) {
+					
+					$scope.errorMsg = "Unauthorized access";
+					$scope.errorSwitch = true;
+				}
+			});
+	}
+	
+	/*service.ClearCredentials = function () {
+        $rootScope.globals = {};
+        $cookieStore.remove('globals');
+        $http.defaults.headers.common.Authorization = 'Basic ';
+    };*/
+	
+	
+	$scope.closeErrorMessage = function() {
+		$scope.errorMsg = "";
+		$scope.errorSwitch = false;
+	}
+
 });
 
 var homepageapp = angular.module('homepageApp', []);
@@ -341,7 +414,7 @@ homepageapp.controller('homepageController', function ($scope, $http, $window, $
 				.then(function(response) {
 				
 					if(response.data.responseCode == 1) {
-						
+						$scope.searchedTasks=[];
 						for(var i=0; i< response.data.responseData.length; i++) {
 							var newTask = {};
 							//alert(response.data.responseData[i].taskStatus);
