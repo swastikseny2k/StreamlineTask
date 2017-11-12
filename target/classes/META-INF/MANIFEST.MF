@@ -1,9 +1,9 @@
 Manifest-Version: 1.0
 Implementation-Title: Streamline Task
 Implementation-Version: 0.0.1-SNAPSHOT
-Built-By: ritambhara
+Built-By: swast
 Implementation-Vendor-Id: com.sen.streamline
-Build-Jdk: 1.8.0_151
+Build-Jdk: 1.8.0_141
 Implementation-URL: http://projects.spring.io/spring-boot/StreamlineTa
  sk/
 Created-By: Maven Integration for Eclipse
